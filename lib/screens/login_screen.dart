@@ -16,6 +16,10 @@ class LoginScreen extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            Text("현재 테스트중"),
+            Text("이메일: test@gmail.com"),
+            Text("비밀번호: 1q2w3e4r!@#"),
+            Divider(),
             TextField(
               controller: emailController,
               decoration: InputDecoration(labelText: 'Email'),
@@ -33,11 +37,13 @@ class LoginScreen extends StatelessWidget {
                     email: emailController.text,
                     password: passwordController.text,
                   );
-                  // 로그인 성공 시 다음 화면으로 이동
-                  Navigator.pushReplacementNamed(context, '/home');
+                  // 로그인 성공 시 업로드 화면으로 이동
+                  Navigator.pushReplacementNamed(context, '/gallery');
                 } catch (e) {
                   // 오류 처리
-                  print('Error: $e');
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Error: $e'),
+                  ));
                 }
               },
               child: Text('Login'),

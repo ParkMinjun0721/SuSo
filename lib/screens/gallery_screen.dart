@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'imagedetail_screen.dart';
 
 class GalleryScreen extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -9,6 +10,12 @@ class GalleryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Gallery'),
+        leading: GestureDetector(
+          child: Icon(Icons.camera_alt),
+          onTap: () {
+            Navigator.pushReplacementNamed(context, '/upload');
+          },
+        ),
       ),
       body: StreamBuilder(
         stream: _firestore.collection('images').snapshots(),
@@ -29,46 +36,14 @@ class GalleryScreen extends StatelessWidget {
                     ),
                   );
                 },
-                child: Image.network(image['url']),
+                child: Hero(
+                  tag: image.id,  // 이미지의 ID를 태그로 사용
+                  child: Image.network(image['url']),
+                ),
               );
             },
           );
         },
-      ),
-    );
-  }
-}
-
-class ImageDetailScreen extends StatelessWidget {
-  final DocumentSnapshot image;
-
-  ImageDetailScreen({required this.image});
-
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  void _likeImage() async {
-    await _firestore.runTransaction((transaction) async {
-      final freshSnapshot = await transaction.get(image.reference);
-      final freshLikes = freshSnapshot['likes'] + 1;
-      transaction.update(image.reference, {'likes': freshLikes});
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Image Detail'),
-      ),
-      body: Column(
-        children: [
-          Image.network(image['url']),
-          Text('Likes: ${image['likes']}'),
-          ElevatedButton(
-            onPressed: _likeImage,
-            child: Text('Like'),
-          ),
-        ],
       ),
     );
   }
