@@ -1,6 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:suzysoheee/screens/commission_screen.dart';
+import 'package:suzysoheee/screens/desktop_layout.dart';
+import 'package:suzysoheee/screens/home_screen.dart';
+import 'package:suzysoheee/screens/inquiry_screen.dart';
+import 'package:suzysoheee/screens/introduction_screen.dart';
+import 'package:suzysoheee/screens/mobile_layout.dart';
 import 'app_state.dart';
 import 'screens/login_screen.dart';
 import 'screens/upload_screen.dart';
@@ -30,17 +36,32 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => LikeProvider()),
       ],
       child: MaterialApp(
-        title: 'Flutter Firebase Web',
+        title: 'Artist Portfolio',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Color(0xFFEDF1F7),
+          scaffoldBackgroundColor: Color(0xFFEDF1F7),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => LoginScreen(),
-          '/upload': (context) => UploadScreen(),
-          '/gallery': (context) => GalleryScreen(),
-        },
+        home: ResponsiveLayout(),
       ),
     );
   }
 }
+
+class ResponsiveLayout extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 600) {
+          // 모바일 레이아웃
+          return MobileLayout();
+        } else {
+          // 데스크톱 레이아웃
+          return DesktopLayout();
+        }
+      },
+    );
+  }
+}
+

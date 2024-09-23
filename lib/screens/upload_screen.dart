@@ -1,8 +1,8 @@
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:file_picker/file_picker.dart';
 
 class UploadScreen extends StatefulWidget {
   @override
@@ -14,6 +14,21 @@ class _UploadScreenState extends State<UploadScreen> {
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkLogin();
+    });
+  }
+
+  Future<void> _checkLogin() async {
+    User? user = _auth.currentUser;
+    if (user == null) {
+      Navigator.pushReplacementNamed(context, '/');
+    }
+  }
 
   Future<void> _pickAndUploadImage() async {
     final result = await FilePicker.platform.pickFiles(type: FileType.image);
@@ -46,22 +61,20 @@ class _UploadScreenState extends State<UploadScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Upload Image'),
-        leading: GestureDetector(child: Icon(Icons.photo),onTap: (){Navigator.pushReplacementNamed(context, '/gallery');},),
+        leading: GestureDetector(child: Icon(Icons.photo), onTap: (){Navigator.pushNamed(context, '/gallery'); },),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _imageUrl == null
-                  ? Text('No image selected.')
-                  : Image.network(_imageUrl!),
-              ElevatedButton(
-                onPressed: _pickAndUploadImage,
-                child: Text('Pick and Upload Image'),
-              ),
-            ],
-          ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _imageUrl == null
+                ? Text('No image selected.')
+                : Image.network(_imageUrl!),
+            ElevatedButton(
+              onPressed: _pickAndUploadImage,
+              child: Text('Pick and Upload Image'),
+            ),
+          ],
         ),
       ),
     );
