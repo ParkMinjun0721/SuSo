@@ -52,6 +52,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  carousel_slider: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -68,6 +69,37 @@ flutter:
   assets:
     - assets/images/suzy1.jpeg
     - assets/images/suzy2.jpeg
+    - assets/images/suzy3.jpeg
+    - assets/images/suzy4.jpeg
+    - assets/images/suzy5.jpeg
+    - assets/images/suzy6.jpeg
+    - assets/images/suzy7.jpeg
+    - assets/images/suzy8.jpeg
+    - assets/images/suzy9.jpeg
+    - assets/images/suzy10.jpeg
+    - assets/images/suzy11.jpeg
+    - assets/images/suzy12.jpeg
+    - assets/images/suzy13.jpeg
+    - assets/images/suzy14.jpeg
+    - assets/images/suzy15.jpeg
+    - assets/images/suzy16.jpeg
+    - assets/images/suzy17.jpeg
+    - assets/images/suzy18.jpeg
+    - assets/images/suzy19.jpeg
+    - assets/images/suzy20.jpeg
+    - assets/images/suzy21.jpeg
+    - assets/images/suzy22.jpeg
+    - assets/images/suzy23.jpeg
+    - assets/images/suzy24.jpeg
+    - assets/images/suzy25.jpeg
+    - assets/images/suzy26.jpeg
+    - assets/images/suzy27.jpeg
+    - assets/images/suzy28.jpeg
+    - assets/images/suzy29.jpeg
+    - assets/images/suzy30.jpeg
+    - assets/images/suzy31.jpeg
+    - assets/images/suzy32.jpeg
+    - assets/images/suzy33.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,9 +1,9 @@
 // mobile_layout.dart
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
-import 'commission_screen.dart';
-import 'introduction_screen.dart';
-import 'inquiry_screen.dart';
+import '../screens/home_screen.dart';
+import '../screens/commission_screen.dart';
+import '../screens/introduction_screen.dart';
+import '../screens/inquiry_screen.dart';
 
 class MobileLayout extends StatelessWidget {
   @override

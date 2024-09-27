@@ -2,15 +2,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:suzysoheee/screens/commission_screen.dart';
-import 'package:suzysoheee/screens/desktop_layout.dart';
+import 'package:suzysoheee/trash/desktop_layout.dart';
 import 'package:suzysoheee/screens/home_screen.dart';
 import 'package:suzysoheee/screens/inquiry_screen.dart';
 import 'package:suzysoheee/screens/introduction_screen.dart';
-import 'package:suzysoheee/screens/mobile_layout.dart';
+import 'package:suzysoheee/trash/mobile_layout.dart';
 import 'app_state.dart';
-import 'screens/login_screen.dart';
-import 'screens/upload_screen.dart';
-import 'screens/gallery_screen.dart';
+import 'trash/login_screen.dart';
+import 'trash/upload_screen.dart';
+import 'trash/gallery_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,27 +40,15 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Color(0xFFEDF1F7),
           scaffoldBackgroundColor: Color(0xFFEDF1F7),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: ResponsiveLayout(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => HomeScreen(),
+          '/commission': (context) => CommissionScreen(),
+          '/introduction': (context) => IntroductionScreen(),
+          '/inquiry': (context) => InquiryScreen(),
+        },
       ),
-    );
-  }
-}
-
-class ResponsiveLayout extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth < 600) {
-          // 모바일 레이아웃
-          return MobileLayout();
-        } else {
-          // 데스크톱 레이아웃
-          return DesktopLayout();
-        }
-      },
     );
   }
 }
